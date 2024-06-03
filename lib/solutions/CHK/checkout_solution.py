@@ -88,7 +88,7 @@ class SKU_B(Item):
         self.single_cost = 30
         self.discount_quantity = 2
         self.discount_amount = 15
-        self.multibuy_one_free_if = [(2, "E")]
+        self.multiprice_one_free_if = [(2, "E")]
 
 class SKU_C(Item):
     def __init__(self):
@@ -135,3 +135,5 @@ class Basket():
 
         return total_cost
 
+if __name__ == "__main__":
+    checkout("EEB")

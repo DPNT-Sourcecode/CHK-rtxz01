@@ -19,4 +19,3 @@ class TestSum():
         assert checkout_solution.checkout("EEB") == 80
 
 
-
