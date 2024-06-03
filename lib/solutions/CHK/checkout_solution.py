@@ -55,6 +55,14 @@ class Item():
 
         # **** Multibuy Discount ****
         # Multibuy discount is only for discounts based on buying X amounts of product
+        """
+        Some further coments to this below block, it is not 100% optimal, there may possibly be cases where
+        different combinations of multibuy works out to a better discount than just doing 2 passes.
+        I thought this was suitable for the given complexity of the context. A shop wouldn't in my guess
+        have super complicated rules of multibuy.
+        However, a recursive function could be used essentially permuting the discounts similar to a decision tree
+        to find the 100% best outcome, however I thought for this excersize this was overcomplicated.
+        """
         best_multibuy_discount = 0
         for multibuy in self.multibuy_discount_offers:
             first_quantity, first_multibuy_discount = multibuy
@@ -153,3 +161,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("EEB")
+
