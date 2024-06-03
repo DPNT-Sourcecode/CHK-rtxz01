@@ -74,12 +74,8 @@ class Item():
                 second_quantity, second_mutlybuy_discount = second_multibuy
                 second_discount = second_mutlybuy_discount * (remainder_quantity // second_quantity)
 
-                if second_discount > best_second_discount:
-                    best_second_discount = second_discount
-
-            iteration_discount = first_discount + second_discount
-            if iteration_discount > best_multibuy_discount:
-                best_multibuy_discount = iteration_discount
+                if first_discount + second_discount > best_multibuy_discount:
+                    best_multibuy_discount = first_discount + second_discount
 
 
 
