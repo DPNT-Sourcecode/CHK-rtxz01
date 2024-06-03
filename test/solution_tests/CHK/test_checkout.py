@@ -13,6 +13,3 @@ class TestSum():
         assert checkout_solution.checkout("CD") == 35
 
 
-
-
-

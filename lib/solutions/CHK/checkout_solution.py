@@ -110,8 +110,3 @@ class Basket():
             total_cost += item.total_cost
 
         return total_cost
-
-
-
-
-
