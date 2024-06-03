@@ -80,6 +80,7 @@ class Item():
             iteration_discount = first_discount + second_discount
             best_multibuy_discount = iteration_discount if\
                 iteration_discount > best_second_discount else best_multibuy_discount
+            print("block")
 
 
 
@@ -160,5 +161,6 @@ class Basket():
         return total_cost
 
 if __name__ == "__main__":
-    checkout("EEB")
+    checkout("AAAAAAAAA")
+
 

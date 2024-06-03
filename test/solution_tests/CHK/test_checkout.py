@@ -29,6 +29,9 @@ class TestSum():
         assert checkout_solution.checkout("AAAAAAAAA") == 330 # Got 350
         assert checkout_solution.checkout("AAAAAAAAAA") == 380 # Got 400
         assert checkout_solution.checkout("EEEEBB") == 160 # Got 145
+        # Error made in finding best discount for multi discount A
+        # Error made in understanidng of 2E one free B as documented above
+
 
 
 
