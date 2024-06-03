@@ -20,6 +20,11 @@ class TestSum():
         # I don't think ths is the intended implementation. Buying 4 E gives you a further 15 discount
         assert checkout_solution.checkout("EEBB") == 80 + (45 - 30)
         assert checkout_solution.checkout("EEEEBB") == 160 + (45 - 60)
+        # Tests that falied when I deployed:
+        assert checkout_solution.checkout("AAAAA") == 200 # Got 230
+        assert checkout_solution.checkout("AAAAAA") == 250 # Got 260
+        assert checkout_solution.checkout("AAAAAAA") == 300 # Got 310
+
 
 
 
