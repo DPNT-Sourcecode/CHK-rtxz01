@@ -38,7 +38,7 @@ class Item():
         self.total_cost = self.single_cost * self.quantity
 
     def discount(self):
-        
+        valid_discounts = self.quantity // self.discount_quantity
 
     def scan(self):
         self.quantity += 1
@@ -86,3 +86,4 @@ class Basket():
 
     def checkout(self):
         pass
+
