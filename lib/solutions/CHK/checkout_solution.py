@@ -36,19 +36,35 @@ class Item():
         self.quantity = 0
         self.discount_quantity = 0
         self.discount_amount = 0
+        self.multiprice_one_free_if = []
 
     # Cost function rings up the value of the quantity and cost of each item
-    def cost(self):
+    def cost(self, all_items):
         self.total_cost = self.single_cost * self.quantity
         self.discount()
 
     # Discount function calculates how many applicable discounts are available and reduces cost
-    def discount(self):
+    def discount(self, all_items):
         # Prevent // 0 error
         if self.discount_quantity == 0:
             return
-        valid_discounts = self.quantity // self.discount_quantity
-        self.total_cost = self.total_cost - self.discount_amount * valid_discounts
+        """
+        My understanding here based on the wording is that if a purchase is made of 'EEBB',
+        one of the B items is free, bu still counts towards the 2 for promo.
+        This would result in a price of 2E (80) + 2B (45) - multipriced (30).
+        Otherwise this would rqeirue checking if mulipriced discount is cheaper than multibuy.
+        This assumption is based on the wording of "All the offers are well balanced so that they can be safely combined."
+        """
+
+        # Multibuy discount is only for discounts based on buying X amounts of product
+        mutlybuy_discount = self.discount_amount * (self.quantity // self.discount_quantity)
+
+        for multiprice in self.multiprice_one_free_if:
+            quantity, item = multiprice
+            if item in all_items.keys():
+                free_items = all_items[item].quantity // quantity
+
+        self.total_cost = self.total_cost - mutlybuy_discount
 
     # Scan adds another quantity of an item to the basket
     def scan(self):
@@ -70,6 +86,14 @@ class SKU_B(Item):
         self.single_cost = 30
         self.discount_quantity = 2
         self.discount_amount = 15
+        self.multibuy_one_free_if = [(2, "E")]
+
+    def discount(self, all_items):
+        # Prevent // 0 error
+        if self.discount_quantity == 0:
+            return
+        valid_discounts = self.quantity // self.discount_quantity
+        self.total_cost = self.total_cost - self.discount_amount * valid_discounts
 
 class SKU_C(Item):
     def __init__(self):
@@ -80,6 +104,11 @@ class SKU_D(Item):
     def __init__(self):
         super().__init__()
         self.single_cost = 15
+
+class SKU_D(Item):
+    def __init__(self):
+        super().__init__()
+        self.single_cost = 40
 
 """
  Ideally this and other constants would be in another file but for simplicity of review I'll
@@ -106,7 +135,7 @@ class Basket():
     def checkout(self):
         total_cost = 0
         for item in self.items.values():
-            item.cost()
+            item.cost(self.items)
             total_cost += item.total_cost
 
         return total_cost
