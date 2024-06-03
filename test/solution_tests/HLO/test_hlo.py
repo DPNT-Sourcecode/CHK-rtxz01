@@ -1,14 +1,15 @@
-from solutions.SUM import sum_solution
+from solutions.HLO import hello_solution
 
 
 class TestSum():
     def test_sum(self):
-        assert sum_solution.compute(1, 2) == 3
+        assert hello_solution.hello.compute("John") == "Hello, John!"
 
     def test_sum_one(self):
-        assert sum_solution.compute(5, 5) == 10
+        assert hello_solution.hello.compute("Jim") == "Hello, Jim!"
 
     def test_sum_two(self):
-        assert sum_solution.compute(10000, 10) == 10010
+        assert hello_solution.hello.compute("James") == "Hello, James!"
+
 
 
