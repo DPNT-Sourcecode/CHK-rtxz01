@@ -28,35 +28,44 @@ def checkout(skus):
 
 class Item():
     def __init__(self):
+        self.total_cost = 0
         self.single_cost = 0
         self.quantity = 0
         self.discount_quantity = 0
         self.discount_amount = 0
 
     def cost(self):
-        raise NotImplementedError()
+        self.total_cost = self.single_cost * self.quantity
 
     def discount(self):
-        raise NotImplementedError()
+        
 
     def scan(self):
-        raise NotImplementedError()
+        self.quantity += 1
 
 class SKU_A(Item):
     def __init__(self):
         super.__init__()
         self.single_cost = 50
         self.discount_quantity = 3
-        self.discount_amount = 
+        self.discount_amount = 20
 
 class SKU_B(Item):
-    pass
+    def __init__(self):
+        super.__init__()
+        self.single_cost = 30
+        self.discount_quantity = 2
+        self.discount_amount = 15
 
 class SKU_C(Item):
-    pass
+    def __init__(self):
+        super.__init__()
+        self.single_cost = 20
 
 class SKU_D(Item):
-    pass
+    def __init__(self):
+        super.__init__()
+        self.single_cost = 15
 
 # Ideally this and other constants would be in another file but for simplicity of review I'll
 # leave it like this. KNOWN_SKUS wouldn't need to exist since  SKU_ITEM_MAP.keys() would work.
