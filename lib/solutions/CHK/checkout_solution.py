@@ -36,7 +36,7 @@ class Item():
         self.quantity = 0
         # self.discount_quantity = 0
         # self.discount_amount = 0
-        multibuy_discount_offers = []
+        self.multibuy_discount_offers = []
         self.multiprice_one_free_if = []
 
     # Cost function rings up the value of the quantity and cost of each item
@@ -54,21 +54,30 @@ class Item():
         one of the B items is free, bu still counts towards the 2 for promo.
         This would result in a price of 2E (80) + 2B (45) - multipriced (30).
         Otherwise this would rqeirue checking if mulipriced discount is cheaper than multibuy.
-        This assumption is based on the wording of "All the offers are well balanced so that they can be safely combined."
+        This assumption is based on the wording of
+         "All the offers are well balanced so that they can be safely combined."
         """
 
         # **** Multibuy Discount ****
         # Multibuy discount is only for discounts based on buying X amounts of product
         mutlybuy_discount = self.discount_amount * (self.quantity // self.discount_quantity)
         best_multibuy_discount = 0
-        for multibuy in self.multibuy:
+        for multibuy in self.multibuy_discount_offers:
             first_quantity, second_mutlybuy_discount = multibuy
             first_discount = mutlybuy_discount * (self.quantity // first_quantity)
             remainder_quantity = self.quantity % first_quantity
-            second_discount = 0
+            best_second_discount = 0
             for second_multibuy in self.multibuy:
-                second_quantity, second_mutlybuy_discount = multibuy
-                second_discount = second_mutlybuy_discount * ( // second_quantity)
+                second_quantity, second_mutlybuy_discount = second_multibuy
+                second_discount = second_mutlybuy_discount * (remainder_quantity // second_quantity)
+
+                best_second_discount = second_discount if\
+                    second_discount > best_second_discount else best_second_discount
+
+            iteration_discount = first_discount + second_discount
+            best_multibuy_discount = iteration_discount if\
+                iteration_discount > best_second_discount else best_multibuy_discount
+
 
 
         # **** Multiprice Discount ****
@@ -152,5 +161,6 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("EEB")
+
 
 
