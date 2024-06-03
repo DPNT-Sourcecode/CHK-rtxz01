@@ -23,4 +23,3 @@ class Item():
 
     def discount(self):
         raise NotImplementedError()
-
