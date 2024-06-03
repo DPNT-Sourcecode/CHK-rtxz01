@@ -35,6 +35,8 @@ class TestSum():
         assert checkout_solution.checkout("AAAAAEEBAAABB") == 455  # Got 470
         assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
+        # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 

@@ -66,7 +66,7 @@ class Item():
             if item in all_items.keys():
                 free_items = all_items[item].quantity // quantity
                 multiprice_discount += self.single_cost * free_items
-                self.quantity =- free_items
+                self.quantity = self.quantity - free_items
 
         # **** Multibuy Discount ****
         # Multibuy discount is only for discounts based on buying X amounts of product
@@ -163,5 +163,6 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("AAAAAEEBAAABB")
+
 
 
