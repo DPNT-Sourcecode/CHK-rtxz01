@@ -12,5 +12,3 @@ class TestSum():
         assert sum_solution.compute(10000, 10) == 10010
 
 
-
-
