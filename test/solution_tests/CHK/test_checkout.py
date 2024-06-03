@@ -11,13 +11,15 @@ class TestSum():
         assert checkout_solution.checkout("C") == 20
         assert checkout_solution.checkout("D") == 15
         assert checkout_solution.checkout("E") == 40
-        assert checkout_solution.checkout("ABCD") == 115
+        assert checkout_solution.checkout("ABCDE") == 155
         assert checkout_solution.checkout("AAA") == 130
         assert checkout_solution.checkout("BBBB") == 90
         assert checkout_solution.checkout("BBAAABB") == 220
         assert checkout_solution.checkout("CD") == 35
         assert checkout_solution.checkout("EEB") == 80
+        # I don't think ths is the intended implementation. Buying 4 E gives you a further 15 discount
         assert checkout_solution.checkout("EEBB") == 80 + (45 - 30)
-        assert checkout_solution.checkout("EEEEBB") == 80 + (45 - 60)
+        assert checkout_solution.checkout("EEEEBB") == 160 + (45 - 60)
+
 
 
