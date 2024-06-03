@@ -74,13 +74,12 @@ class Item():
                 second_quantity, second_mutlybuy_discount = second_multibuy
                 second_discount = second_mutlybuy_discount * (remainder_quantity // second_quantity)
 
-                best_second_discount = second_discount if\
-                    second_discount > best_second_discount else best_second_discount
+                if second_discount > best_second_discount:
+                    best_second_discount = second_discount
 
             iteration_discount = first_discount + second_discount
-            best_multibuy_discount = iteration_discount if\
-                iteration_discount > best_second_discount else best_multibuy_discount
-            print("block")
+            if iteration_discount > best_multibuy_discount:
+                best_multibuy_discount = iteration_discount
 
 
 
@@ -94,7 +93,6 @@ class Item():
                 multiprice_discount += self.single_cost * free_items
 
         self.total_cost = (self.total_cost - best_multibuy_discount) - multiprice_discount
-
     # Scan adds another quantity of an item to the basket
     def scan(self):
         self.quantity += 1
@@ -162,5 +160,6 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("AAAAAAAAA")
+
 
 
