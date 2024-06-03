@@ -12,4 +12,3 @@ class TestSum():
         assert hello_solution.hello.compute("James") == "Hello, James!"
 
 
-
