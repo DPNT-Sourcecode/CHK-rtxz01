@@ -24,6 +24,8 @@ class TestSum():
         assert checkout_solution.checkout("AAAAA") == 200 # Got 230
         assert checkout_solution.checkout("AAAAAA") == 250 # Got 260
         assert checkout_solution.checkout("AAAAAAA") == 300 # Got 310
+        # Mistake was missing out the second added promo for the 5 purchase of A
+
 
 
 
