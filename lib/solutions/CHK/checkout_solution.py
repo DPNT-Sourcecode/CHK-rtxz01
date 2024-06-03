@@ -9,10 +9,8 @@ KNOWN_SKUS = ["A", "B", "C", "D"]
 def checkout(skus):
     # Verify all items in sku string are valid strings and known
     # Check if input string is a string
-    try:
-        str(skus)
-    except Exception:
-            return -1
+    if not isinstance(skus, str):
+        return -1
 
     # Check all letters inside the string are valid and letters
     for sku in skus:
@@ -46,6 +44,9 @@ class Item():
 
     # Discount function calculates how many applicable discounts are available and reduces cost
     def discount(self):
+        # Prevent // 0 error
+        if self.discount_quantity == 0:
+            return
         valid_discounts = self.quantity // self.discount_quantity
         self.total_cost = self.total_cost - self.discount_amount * valid_discounts
 
@@ -109,6 +110,7 @@ class Basket():
             total_cost += item.total_cost
 
         return total_cost
+
 
 
 
