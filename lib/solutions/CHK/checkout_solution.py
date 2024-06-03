@@ -60,13 +60,13 @@ class Item():
 
         # **** Multibuy Discount ****
         # Multibuy discount is only for discounts based on buying X amounts of product
-        mutlybuy_discount = self.discount_amount * (self.quantity // self.discount_quantity)
         best_multibuy_discount = 0
         for multibuy in self.multibuy_discount_offers:
-            first_quantity, second_mutlybuy_discount = multibuy
-            first_discount = mutlybuy_discount * (self.quantity // first_quantity)
+            first_quantity, first_multibuy_discount = multibuy
+            first_discount = first_multibuy_discount * (self.quantity // first_quantity)
             remainder_quantity = self.quantity % first_quantity
             best_second_discount = 0
+            
             for second_multibuy in self.multibuy:
                 second_quantity, second_mutlybuy_discount = second_multibuy
                 second_discount = second_mutlybuy_discount * (remainder_quantity // second_quantity)
@@ -102,16 +102,13 @@ class SKU_A(Item):
     def __init__(self):
         super().__init__()
         self.single_cost = 50
-        self.discount_quantity = 3
-        self.discount_amount = 20
+        self.multibuy_discount_offers = [(3, 20), (5, 50)]
 
 class SKU_B(Item):
     def __init__(self):
         super().__init__()
         self.single_cost = 30
-        # self.discount_quantity = 2
-        # self.discount_amount = 15
-        self.multibuy_discount_offers = [(3, 20), (5, 50)]
+        self.multibuy_discount_offers = [(2, 15)]
         self.multiprice_one_free_if = [(2, "E")]
 
 class SKU_C(Item):
@@ -161,6 +158,3 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("EEB")
-
-
-

@@ -26,7 +26,3 @@ class TestSum():
         assert checkout_solution.checkout("AAAAAAA") == 300 # Got 310
         # Mistake was missing out the second added promo for the 5 purchase of A
 
-
-
-
-
