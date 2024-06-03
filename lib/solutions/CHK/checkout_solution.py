@@ -62,8 +62,13 @@ class Item():
         mutlybuy_discount = self.discount_amount * (self.quantity // self.discount_quantity)
         best_multibuy_discount = 0
         for multibuy in self.multibuy:
-            quantity, mutlybuy_discount = multibuy
-            discount = best_multibuy_discount * (self.quantity // quantity)
+            first_quantity, second_mutlybuy_discount = multibuy
+            first_discount = mutlybuy_discount * (self.quantity // first_quantity)
+            remainder_quantity = self.quantity % first_quantity
+            second_discount = 0
+            for second_multibuy in self.multibuy:
+                second_quantity, second_mutlybuy_discount = multibuy
+                second_discount = second_mutlybuy_discount * ( // second_quantity)
 
 
         # **** Multiprice Discount ****
@@ -147,4 +152,5 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("EEB")
+
 
