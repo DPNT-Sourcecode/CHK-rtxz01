@@ -34,7 +34,8 @@ class TestSum():
         # Error made in understanding of 2E one free B as documented above
         assert checkout_solution.checkout("AAAAAEEBAAABB") == 455  # Got 470
         assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
-        # 455 vs 470 result means when one B is free, the discount is still applied to one of the items
+        # 455 vs 470 result means I'm not calculating the 2B discount properly
+
 
 
 
