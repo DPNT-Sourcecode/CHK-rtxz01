@@ -58,26 +58,26 @@ Below are definitions for individual items, their costing and their discounts.
 """
 class SKU_A(Item):
     def __init__(self):
-        super.__init__()
+        super().__init__()
         self.single_cost = 50
         self.discount_quantity = 3
         self.discount_amount = 20
 
 class SKU_B(Item):
     def __init__(self):
-        super.__init__()
+        super().__init__()
         self.single_cost = 30
         self.discount_quantity = 2
         self.discount_amount = 15
 
 class SKU_C(Item):
     def __init__(self):
-        super.__init__()
+        super().__init__()
         self.single_cost = 20
 
 class SKU_D(Item):
     def __init__(self):
-        super.__init__()
+        super().__init__()
         self.single_cost = 15
 
 """
@@ -99,6 +99,7 @@ class Basket():
             self.items[sku].scan()
         else:
             self.items[sku] = SKU_ITEM_MAP[sku]()
+            self.items[sku].scan()
 
     # Calculates total cost of items in basket
     def checkout(self):
@@ -108,6 +109,7 @@ class Basket():
             total_cost += item.total_cost
 
         return total_cost
+
 
 
 
