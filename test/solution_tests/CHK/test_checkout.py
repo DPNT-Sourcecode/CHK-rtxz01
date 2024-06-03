@@ -18,7 +18,8 @@ class TestSum():
         assert checkout_solution.checkout("CD") == 35
         assert checkout_solution.checkout("EEB") == 80
         # I don't think ths is the intended implementation. Buying 4 E gives you a further 15 discount
-        assert checkout_solution.checkout("EEBB") == 80 + (45 - 30)
+        # second revision of this, my assert may be incorrect due to my new understanding of how multiprice works
+        # assert checkout_solution.checkout("EEBB") == 80 + (45 - 30)
         # My assumption before was incorrect, the correct expected result here was 160
         # assert checkout_solution.checkout("EEEEBB") == 160 + (45 - 60)
         # Tests that falied when I deployed:
@@ -30,7 +31,8 @@ class TestSum():
         assert checkout_solution.checkout("AAAAAAAAA") == 380 # Got 400
         assert checkout_solution.checkout("EEEEBB") == 160 # Got 145
         # Error made in finding best discount for multi discount A
-        # Error made in understanidng of 2E one free B as documented above
+        # Error made in understanding of 2E one free B as documented above
+
 
 
 

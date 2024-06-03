@@ -53,6 +53,21 @@ class Item():
          "All the offers are well balanced so that they can be safely combined."
         """
 
+        """
+        After deploying and failing a test I learned that 4 EE purchases should remove the cost even the discounted
+        price of the 2B for 45, which Iw as unsure about. Now I assume that when an item is marked as 'Free' it no
+        longer counts towards promos for that item, unless this still counts for one item for 45 - 30, will see.
+        """
+        # **** Multiprice Discount ****
+        multiprice_discount = 0
+        # multiprice_one_free_if is a list of any multipriced offers that translates to a free item
+        for multiprice in self.multiprice_one_free_if:
+            quantity, item = multiprice
+            if item in all_items.keys():
+                free_items = all_items[item].quantity // quantity
+                multiprice_discount += self.single_cost * free_items
+                self.quantity =- free_items
+
         # **** Multibuy Discount ****
         # Multibuy discount is only for discounts based on buying X amounts of product
         """
@@ -79,14 +94,6 @@ class Item():
 
 
 
-        # **** Multiprice Discount ****
-        multiprice_discount = 0
-        # multiprice_one_free_if is a list of any multipriced offers that translates to a free item
-        for multiprice in self.multiprice_one_free_if:
-            quantity, item = multiprice
-            if item in all_items.keys():
-                free_items = all_items[item].quantity // quantity
-                multiprice_discount += self.single_cost * free_items
 
         self.total_cost = (self.total_cost - best_multibuy_discount) - multiprice_discount
     # Scan adds another quantity of an item to the basket
@@ -156,3 +163,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("AAAAAAAA")
+
