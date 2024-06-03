@@ -41,7 +41,7 @@ class Item():
     # Cost function rings up the value of the quantity and cost of each item
     def cost(self, all_items):
         self.total_cost = self.single_cost * self.quantity
-        self.discount()
+        self.discount(all_items)
 
     # Discount function calculates how many applicable discounts are available and reduces cost
     def discount(self, all_items):
@@ -58,13 +58,15 @@ class Item():
 
         # Multibuy discount is only for discounts based on buying X amounts of product
         mutlybuy_discount = self.discount_amount * (self.quantity // self.discount_quantity)
-
+        multiprice_discount = 0
+        # multiprice_one_free_if is a list of any multipriced offers that translates to a free item
         for multiprice in self.multiprice_one_free_if:
             quantity, item = multiprice
             if item in all_items.keys():
                 free_items = all_items[item].quantity // quantity
+                multiprice_discount += self.single_cost * free_items
 
-        self.total_cost = self.total_cost - mutlybuy_discount
+        self.total_cost = (self.total_cost - mutlybuy_discount) - multiprice_discount
 
     # Scan adds another quantity of an item to the basket
     def scan(self):
@@ -86,7 +88,7 @@ class SKU_B(Item):
         self.single_cost = 30
         self.discount_quantity = 2
         self.discount_amount = 15
-        self.multibuy_one_free_if = [(2, "E")]
+        # self.multibuy_one_free_if = [(2, "E")]
 
     def discount(self, all_items):
         # Prevent // 0 error
