@@ -4,7 +4,7 @@
  As mentioned below, constants should be in seperate file, but to make it easier to
  Review I've left it here
 """
-KNOWN_SKUS = ["A", "B", "C", "D"]
+KNOWN_SKUS = ["A", "B", "C", "D", "E"]
 
 def checkout(skus):
     # Verify all items in sku string are valid strings and known
@@ -88,14 +88,7 @@ class SKU_B(Item):
         self.single_cost = 30
         self.discount_quantity = 2
         self.discount_amount = 15
-        # self.multibuy_one_free_if = [(2, "E")]
-
-    def discount(self, all_items):
-        # Prevent // 0 error
-        if self.discount_quantity == 0:
-            return
-        valid_discounts = self.quantity // self.discount_quantity
-        self.total_cost = self.total_cost - self.discount_amount * valid_discounts
+        self.multibuy_one_free_if = [(2, "E")]
 
 class SKU_C(Item):
     def __init__(self):
@@ -107,7 +100,7 @@ class SKU_D(Item):
         super().__init__()
         self.single_cost = 15
 
-class SKU_D(Item):
+class SKU_E(Item):
     def __init__(self):
         super().__init__()
         self.single_cost = 40
@@ -116,7 +109,7 @@ class SKU_D(Item):
  Ideally this and other constants would be in another file but for simplicity of review I'll
  leave it like this. KNOWN_SKUS wouldn't need to exist since  SKU_ITEM_MAP.keys() would work.
 """
-SKU_ITEM_MAP = {"A": SKU_A, "B": SKU_B, "C": SKU_C, "D": SKU_D}
+SKU_ITEM_MAP = {"A": SKU_A, "B": SKU_B, "C": SKU_C, "D": SKU_D, "E": SKU_E}
 
 
 class Basket():
@@ -141,3 +134,4 @@ class Basket():
             total_cost += item.total_cost
 
         return total_cost
+
