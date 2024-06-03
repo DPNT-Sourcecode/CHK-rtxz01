@@ -34,8 +34,6 @@ class Item():
         self.total_cost = 0
         self.single_cost = 0
         self.quantity = 0
-        # self.discount_quantity = 0
-        # self.discount_amount = 0
         self.multibuy_discount_offers = []
         self.multiprice_one_free_if = []
 
@@ -46,9 +44,6 @@ class Item():
 
     # Discount function calculates how many applicable discounts are available and reduces cost
     def discount(self, all_items):
-        # Prevent // 0 error
-        if self.discount_quantity == 0:
-            return
         """
         My understanding here based on the wording is that if a purchase is made of 'EEBB',
         one of the B items is free, bu still counts towards the 2 for promo.
@@ -67,7 +62,7 @@ class Item():
             remainder_quantity = self.quantity % first_quantity
             best_second_discount = 0
             
-            for second_multibuy in self.multibuy:
+            for second_multibuy in self.multibuy_discount_offers:
                 second_quantity, second_mutlybuy_discount = second_multibuy
                 second_discount = second_mutlybuy_discount * (remainder_quantity // second_quantity)
 
