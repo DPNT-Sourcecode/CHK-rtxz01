@@ -34,8 +34,9 @@ class Item():
         self.total_cost = 0
         self.single_cost = 0
         self.quantity = 0
-        self.discount_quantity = 0
-        self.discount_amount = 0
+        # self.discount_quantity = 0
+        # self.discount_amount = 0
+        multibuy_discount_offers = []
         self.multiprice_one_free_if = []
 
     # Cost function rings up the value of the quantity and cost of each item
@@ -56,8 +57,15 @@ class Item():
         This assumption is based on the wording of "All the offers are well balanced so that they can be safely combined."
         """
 
+        # **** Multibuy Discount ****
         # Multibuy discount is only for discounts based on buying X amounts of product
         mutlybuy_discount = self.discount_amount * (self.quantity // self.discount_quantity)
+        best_multibuy_discount = 0
+        for multibuy in self.multibuy:
+            quantity, mutlybuy_discount = multibuy
+
+
+        # **** Multiprice Discount ****
         multiprice_discount = 0
         # multiprice_one_free_if is a list of any multipriced offers that translates to a free item
         for multiprice in self.multiprice_one_free_if:
@@ -66,7 +74,7 @@ class Item():
                 free_items = all_items[item].quantity // quantity
                 multiprice_discount += self.single_cost * free_items
 
-        self.total_cost = (self.total_cost - mutlybuy_discount) - multiprice_discount
+        self.total_cost = (self.total_cost - best_multibuy_discount) - multiprice_discount
 
     # Scan adds another quantity of an item to the basket
     def scan(self):
@@ -86,8 +94,9 @@ class SKU_B(Item):
     def __init__(self):
         super().__init__()
         self.single_cost = 30
-        self.discount_quantity = 2
-        self.discount_amount = 15
+        # self.discount_quantity = 2
+        # self.discount_amount = 15
+        self.multibuy_discount_offers = [(3, 20), (5, 50)]
         self.multiprice_one_free_if = [(2, "E")]
 
 class SKU_C(Item):
