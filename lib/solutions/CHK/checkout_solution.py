@@ -159,7 +159,4 @@ class Basket():
         return total_cost
 
 if __name__ == "__main__":
-    checkout("AAAAAAAAA")
-
-
-
+    checkout("AAAAAAAA")

@@ -26,12 +26,10 @@ class TestSum():
         assert checkout_solution.checkout("AAAAAA") == 250 # Got 260
         assert checkout_solution.checkout("AAAAAAA") == 300 # Got 310
         # Mistake was missing out the second added promo for the 5 purchase of A
-        assert checkout_solution.checkout("AAAAAAAAA") == 330 # Got 350
+        assert checkout_solution.checkout("AAAAAAAA") == 330 # Got 350
         assert checkout_solution.checkout("AAAAAAAAAA") == 380 # Got 400
         assert checkout_solution.checkout("EEEEBB") == 160 # Got 145
         # Error made in finding best discount for multi discount A
         # Error made in understanidng of 2E one free B as documented above
-
-
 
 
