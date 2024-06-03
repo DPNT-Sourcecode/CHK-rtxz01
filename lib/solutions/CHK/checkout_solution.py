@@ -25,7 +25,10 @@ def checkout(skus):
 
     basket = Basket()
     for sku in skus:
-        basket.scan(sku)
+        basket.scan(sku.upper())
+
+    total = basket.checkout()
+    return total
 
 class Item():
     # Init function to set default values for child objects
@@ -105,5 +108,6 @@ class Basket():
             total_cost += item.total_cost
 
         return total_cost
+
 
 
