@@ -12,26 +12,26 @@ class TestSum():
         assert checkout_solution.checkout("D") == 15
         assert checkout_solution.checkout("E") == 40
         assert checkout_solution.checkout("F") == 10
-       assert checkout_solution.checkout("G": {KEY_SINGLECOST: 20, },
-       assert checkout_solution.checkout("H": {KEY_SINGLECOST: 10, },
-       assert checkout_solution.checkout("I": {KEY_SINGLECOST: 35, },
-       assert checkout_solution.checkout("J": {KEY_SINGLECOST: 60, },
-       assert checkout_solution.checkout("K": {KEY_SINGLECOST: 80, },
-       assert checkout_solution.checkout("L": {KEY_SINGLECOST: 90, },
-       assert checkout_solution.checkout("M": {KEY_SINGLECOST: 15, },
-       assert checkout_solution.checkout("N": {KEY_SINGLECOST: 40, },
-       assert checkout_solution.checkout("O": {KEY_SINGLECOST: 10, },
-       assert checkout_solution.checkout("P": {KEY_SINGLECOST: 50, },
-       assert checkout_solution.checkout("Q": {KEY_SINGLECOST: 30, },
-       assert checkout_solution.checkout("R": {KEY_SINGLECOST: 50, },
-       assert checkout_solution.checkout("S": {KEY_SINGLECOST: 30, },
-       assert checkout_solution.checkout("T": {KEY_SINGLECOST: 20, },
-       assert checkout_solution.checkout("U": {KEY_SINGLECOST: 40, },
-       assert checkout_solution.checkout("V": {KEY_SINGLECOST: 50, },
-       assert checkout_solution.checkout("W": {KEY_SINGLECOST: 20, },
-       assert checkout_solution.checkout("X": {KEY_SINGLECOST: 90, },
-       assert checkout_solution.checkout("Y": {KEY_SINGLECOST: 10, },
-       assert checkout_solution.checkout("Z": {KEY_SINGLECOST: 50, },
+        assert checkout_solution.checkout("G") ==  20
+        assert checkout_solution.checkout("H") ==  10
+        assert checkout_solution.checkout("I") ==  35
+        assert checkout_solution.checkout("J") ==  60
+        assert checkout_solution.checkout("K") ==  80
+        assert checkout_solution.checkout("L") ==  90
+        assert checkout_solution.checkout("M") ==  15
+        assert checkout_solution.checkout("N") ==  40
+        assert checkout_solution.checkout("O") ==  10
+        assert checkout_solution.checkout("P") ==  50
+        assert checkout_solution.checkout("Q") ==  30
+        assert checkout_solution.checkout("R") ==  50
+        assert checkout_solution.checkout("S") ==  30
+        assert checkout_solution.checkout("T") ==  20
+        assert checkout_solution.checkout("U") ==  40
+        assert checkout_solution.checkout("V") ==  50
+        assert checkout_solution.checkout("W") ==  20
+        assert checkout_solution.checkout("X") ==  90
+        assert checkout_solution.checkout("Y") ==  10
+        assert checkout_solution.checkout("Z") ==  50
         assert checkout_solution.checkout("ABCDEF") == 165
         assert checkout_solution.checkout("AAA") == 130
         assert checkout_solution.checkout("BBBB") == 90
@@ -64,6 +64,7 @@ class TestSum():
         assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 

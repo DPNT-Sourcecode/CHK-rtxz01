@@ -62,11 +62,12 @@ def checkout(skus):
 
 class Item():
     # Init function to set default values for child objects
-    def __init__(self):
+    def __init__(self, sku):
+        self.sku = sku
         self.total_cost = 0
-        self.single_cost = 0
         self.quantity = 0
-        self.multibuy_discount_offers = []
+        self.single_cost = SKU_DISCOUNT_MAP[self.sku][KEY_SINGLECOST]
+        self.multibuy_discount_offers = SKU_DISCOUNT_MAP.get(SKU_DISCOUNT_MAP[self.sku][KEY_MULTIBUY_OFFERS], [])
         self.multiprice_one_free_if = []
         self.buyx_gety_free = []
 
@@ -227,7 +228,7 @@ class Basket():
         if sku in self.items.keys():
             self.items[sku].scan()
         else:
-            self.items[sku] = SKU_ITEM_MAP[sku]()
+            self.items[sku] = Item(sku)
             self.items[sku].scan()
 
     # Calculates total cost of items in basket
@@ -241,3 +242,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
+
