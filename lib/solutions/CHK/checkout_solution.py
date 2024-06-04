@@ -45,7 +45,8 @@ class Item():
 
     # Discount function calculates how many applicable discounts are available and reduces cost
     def discount(self, all_items):
-
+        buyX_getY_free_items = self.get_buyx_gety_free_quantity()
+        self.quantity -= buyX_getY_free_items
         best_multiprice_discount = self.get_best_multiprice_discount(all_items)
         best_multibuy_discount = self.get_best_multibuy_discount()
         self.total_cost = (self.total_cost - best_multibuy_discount) - best_multiprice_discount
@@ -103,6 +104,28 @@ class Item():
                     best_multibuy_discount = first_discount + second_discount
 
         return best_multibuy_discount
+
+    # @returns amount of free items to be removed from quantity
+    def get_buyx_gety_free_quantity(self):
+        """
+        So at the moment I don't see any possible conflicts with the buyXgetY free
+        when it comes to the best offer for the customer, but this potentially might change
+        and require a rewrite of how these discounts are handled.
+        """
+        most_free_items = 0
+        for offer in self.buyx_gety_free:
+            quantity_needed, free_quantity = offer
+            current_quantity = self.quantity
+            free_items = 0
+            while quantity_needed <= current_quantity:
+                free_items += 1
+                current_quantity -= 1
+
+            if free_items > most_free_items:
+                most_free_items = free_items
+
+        return most_free_items
+
 
     # Scan adds another quantity of an item to the basket
     def scan(self):
@@ -177,4 +200,3 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("AAAAAEEBAAABB")
-

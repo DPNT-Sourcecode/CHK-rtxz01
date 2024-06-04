@@ -11,12 +11,20 @@ class TestSum():
         assert checkout_solution.checkout("C") == 20
         assert checkout_solution.checkout("D") == 15
         assert checkout_solution.checkout("E") == 40
-        assert checkout_solution.checkout("ABCDE") == 155
+        assert checkout_solution.checkout("F") == 10
+        assert checkout_solution.checkout("ABCDEF") == 165
         assert checkout_solution.checkout("AAA") == 130
         assert checkout_solution.checkout("BBBB") == 90
         assert checkout_solution.checkout("BBAAABB") == 220
         assert checkout_solution.checkout("CD") == 35
         assert checkout_solution.checkout("EEB") == 80
+        assert checkout_solution.checkout("FF") == 20
+        assert checkout_solution.checkout("FFF") == 20
+        assert checkout_solution.checkout("FFFF") == 30
+        assert checkout_solution.checkout("FFFFF") == 40
+        assert checkout_solution.checkout("FFFFFF") == 40
+
+
         # I don't think ths is the intended implementation. Buying 4 E gives you a further 15 discount
         # second revision of this, my assert may be incorrect due to my new understanding of how multiprice works
         # assert checkout_solution.checkout("EEBB") == 80 + (45 - 30)
