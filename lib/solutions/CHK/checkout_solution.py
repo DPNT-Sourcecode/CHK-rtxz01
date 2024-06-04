@@ -46,8 +46,8 @@ class Item():
     # Discount function calculates how many applicable discounts are available and reduces cost
     def discount(self, all_items):
 
-        best_multibuy_discount = self.get_best_multibuy_discount()
         best_multiprice_discount = self.get_best_multiprice_discount(all_items)
+        best_multibuy_discount = self.get_best_multibuy_discount()
         self.total_cost = (self.total_cost - best_multibuy_discount) - best_multiprice_discount
 
     # @ param - all-items = all items in basket
@@ -177,3 +177,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("AAAAAEEBAAABB")
+
