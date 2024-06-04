@@ -12,6 +12,26 @@ class TestSum():
         assert checkout_solution.checkout("D") == 15
         assert checkout_solution.checkout("E") == 40
         assert checkout_solution.checkout("F") == 10
+        "G": {KEY_SINGLECOST: 20, },
+        "H": {KEY_SINGLECOST: 10, },
+        "I": {KEY_SINGLECOST: 35, },
+        "J": {KEY_SINGLECOST: 60, },
+        "K": {KEY_SINGLECOST: 80, },
+        "L": {KEY_SINGLECOST: 90, },
+        "M": {KEY_SINGLECOST: 15, },
+        "N": {KEY_SINGLECOST: 40, },
+        "O": {KEY_SINGLECOST: 10, },
+        "P": {KEY_SINGLECOST: 50, },
+        "Q": {KEY_SINGLECOST: 30, },
+        "R": {KEY_SINGLECOST: 50, },
+        "S": {KEY_SINGLECOST: 30, },
+        "T": {KEY_SINGLECOST: 20, },
+        "U": {KEY_SINGLECOST: 40, },
+        "V": {KEY_SINGLECOST: 50, },
+        "W": {KEY_SINGLECOST: 20, },
+        "X": {KEY_SINGLECOST: 90, },
+        "Y": {KEY_SINGLECOST: 10, },
+        "Z": {KEY_SINGLECOST: 50, },
         assert checkout_solution.checkout("ABCDEF") == 165
         assert checkout_solution.checkout("AAA") == 130
         assert checkout_solution.checkout("BBBB") == 90
@@ -44,6 +64,7 @@ class TestSum():
         assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 
