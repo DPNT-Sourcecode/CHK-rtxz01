@@ -5,31 +5,34 @@
  Review I've left it here
 """
 KEY_SINGLECOST = "single_cost"
+# Multibuy syntax is [(Quantity needed, discount)]
 KEY_MULTIBUY_OFFERS = "multibuy_discount_offers"
+# Multiprice syntax is [(Quantity needed of SKU for a free item, SKU)]
 KEY_MULTIPRICE_OFFERS = "multiprice_one_free_if"
+# BuyXgetYFree syntax is [(Quantity required, amount free)]
 KEY_BUYX_GETY_FREE_OFFERS = "buyx_gety_free"
 SKU_DISCOUNT_MAP = {
     "A": {KEY_SINGLECOST: 50, KEY_MULTIBUY_OFFERS: [(3, 20), (5, 50)]},
-    "B": {KEY_SINGLECOST: 30, KEY_MULTIBUY_OFFERS: [(2, 15)]},
+    "B": {KEY_SINGLECOST: 30, KEY_MULTIBUY_OFFERS: [(2, 15)], KEY_MULTIPRICE_OFFERS: [(2, "E")]},
     "C": {KEY_SINGLECOST: 20,},
     "D": {KEY_SINGLECOST: 15,},
     "E": {KEY_SINGLECOST: 40,},
-    "F": {KEY_SINGLECOST: 10,},
+    "F": {KEY_SINGLECOST: 10, KEY_BUYX_GETY_FREE_OFFERS: [(2, 1)]},
     "G": {KEY_SINGLECOST: 20,},
     "H": {KEY_SINGLECOST: 10, KEY_MULTIBUY_OFFERS: [(5, 5), (10, 20)]},
     "I": {KEY_SINGLECOST: 35,},
     "J": {KEY_SINGLECOST: 60,},
     "K": {KEY_SINGLECOST: 80, KEY_MULTIBUY_OFFERS: [(2, 10)]},
     "L": {KEY_SINGLECOST: 90,},
-    "M": {KEY_SINGLECOST: 15,},
+    "M": {KEY_SINGLECOST: 15, KEY_MULTIPRICE_OFFERS: [(3, "N")]},
     "N": {KEY_SINGLECOST: 40,},
     "O": {KEY_SINGLECOST: 10,},
     "P": {KEY_SINGLECOST: 50, KEY_MULTIBUY_OFFERS: [(5, 50)]},
-    "Q": {KEY_SINGLECOST: 30, KEY_MULTIBUY_OFFERS: [(3, 10)]},
+    "Q": {KEY_SINGLECOST: 30, KEY_MULTIBUY_OFFERS: [(3, 10)], KEY_MULTIPRICE_OFFERS: [(3, "R")]},
     "R": {KEY_SINGLECOST: 50,},
     "S": {KEY_SINGLECOST: 30,},
     "T": {KEY_SINGLECOST: 20,},
-    "U": {KEY_SINGLECOST: 40,},
+    "U": {KEY_SINGLECOST: 40, KEY_BUYX_GETY_FREE_OFFERS: [(3, 1)]},
     "V": {KEY_SINGLECOST: 50, KEY_MULTIBUY_OFFERS: [(2, 10), (3, 20)]},
     "W": {KEY_SINGLECOST: 20,},
     "X": {KEY_SINGLECOST: 90,},
@@ -85,6 +88,7 @@ class Item():
         best_multibuy_discount = self.get_best_multibuy_discount()
         self.total_cost = (self.total_cost -
                            (best_multibuy_discount + best_multiprice_discount + buyx_gety_free_discount))
+
 
     # @ param - all-items = all items in basket
     # @returns best applicable multiprice discount
@@ -235,3 +239,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
+
