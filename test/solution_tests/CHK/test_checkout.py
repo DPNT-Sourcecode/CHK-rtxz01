@@ -43,6 +43,16 @@ class TestSum():
         assert checkout_solution.checkout("FFFF") == 30
         assert checkout_solution.checkout("FFFFF") == 40
         assert checkout_solution.checkout("FFFFFF") == 40
+        assert checkout_solution.checkout("KK") == 150
+        assert checkout_solution.checkout("KKK") == 230
+        assert checkout_solution.checkout("KKKK") == 300
+        assert checkout_solution.checkout("KKKKK") == 380
+        assert checkout_solution.checkout("KKKKKK") == 450
+        assert checkout_solution.checkout("PPPPP") == 200
+        assert checkout_solution.checkout("PPPPPP") == 250
+        assert checkout_solution.checkout("PPPPPPP") == 300
+        assert checkout_solution.checkout("PPPPPPPPPP") == 400
+        assert checkout_solution.checkout("PPPPPPPPPPP") == 450
 
 
         # I don't think ths is the intended implementation. Buying 4 E gives you a further 15 discount
@@ -64,6 +74,7 @@ class TestSum():
         assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 
