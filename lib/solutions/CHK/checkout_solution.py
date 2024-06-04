@@ -5,6 +5,38 @@
  Review I've left it here
 """
 KNOWN_SKUS = ["A", "B", "C", "D", "E", "F"]
+KEY_SINGLECOST = "single_cost"
+KEY_MULTIBUY_OFFERS = "multibuy_discount_offers"
+KEY_MULTIPRICE_OFFERS = "multiprice_one_free_if"
+KEY_BUYX_GETY_FREE_OFFERS = "buyx_gety_free"
+SKU_DISCOUNT_MAP = {
+    "A": {KEY_SINGLECOST: 50,},
+    "B": {KEY_SINGLECOST: 30,},
+    "C": {KEY_SINGLECOST: 20,},
+    "D": {KEY_SINGLECOST: 15,},
+    "E": {KEY_SINGLECOST: 40,},
+    "F": {KEY_SINGLECOST: 10,},
+    "G": {KEY_SINGLECOST: 20,},
+    "H": {KEY_SINGLECOST: 10,},
+    "I": {KEY_SINGLECOST: 35,},
+    "J": {KEY_SINGLECOST: 60,},
+    "K": {KEY_SINGLECOST: 80,},
+    "L": {KEY_SINGLECOST: 90,},
+    "M": {KEY_SINGLECOST: 15,},
+    "N": {KEY_SINGLECOST: 40,},
+    "O": {KEY_SINGLECOST: 10,},
+    "P": {KEY_SINGLECOST: 50,},
+    "Q": {KEY_SINGLECOST: 30,},
+    "R": {KEY_SINGLECOST: 50,},
+    "S": {KEY_SINGLECOST: 30,},
+    "T": {KEY_SINGLECOST: 20,},
+    "U": {KEY_SINGLECOST: 40,},
+    "V": {KEY_SINGLECOST: 50,},
+    "W": {KEY_SINGLECOST: 20,},
+    "X": {KEY_SINGLECOST: 90,},
+    "Y": {KEY_SINGLECOST: 10,},
+    "Z": {KEY_SINGLECOST: 50,},
+}
 
 def checkout(skus):
     # Verify all items in sku string are valid strings and known
@@ -137,6 +169,12 @@ class Item():
 """
 Below are definitions for individual items, their costing and their discounts. 
 """
+"""
+The previous approach was go in the case that overriding methods would be needed.
+But at this point it looks like it's redundant and should be refactored to a map for simplicity
+and easier maintenance, if this changes I could always revert to this method.
+"""
+
 class SKU_A(Item):
     def __init__(self):
         super().__init__()
