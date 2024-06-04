@@ -75,6 +75,14 @@ class TestSum():
         assert checkout_solution.checkout("NNNMM") == 135
         assert checkout_solution.checkout("NNNNNNMM") == 240
         # Complex multiprice (mixed with multibuy)
+        assert checkout_solution.checkout("RRR") == 150
+        assert checkout_solution.checkout("RRRQ") == 150
+        assert checkout_solution.checkout("RRRQQ") == 180
+        assert checkout_solution.checkout("RRRQQQ") == 150 + 60
+        assert checkout_solution.checkout("RRRQQQQ") == 150 + 80
+        assert checkout_solution.checkout("RRRRRRQQQQ") == 300 + 60
+        assert checkout_solution.checkout("RRRRRRQQQQQ") == 300 + 80
+        assert checkout_solution.checkout("RRRRRRQQQQQQ") == 300 + 110
 
         # buy x get y free tests
         assert checkout_solution.checkout("FFF") == 20
@@ -84,7 +92,7 @@ class TestSum():
         assert checkout_solution.checkout("UUU") == 120
         assert checkout_solution.checkout("UUUU") == 120
         assert checkout_solution.checkout("UUUUU") == 160
-        assert checkout_solution.checkout("UUUUUU") == 240
+        assert checkout_solution.checkout("UUUUUU") == 200
         assert checkout_solution.checkout("UUUUUUU") == 200
         assert checkout_solution.checkout("UUUUUUUU") == 200
 
@@ -121,6 +129,7 @@ track of my mistakes here.
         # assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 
