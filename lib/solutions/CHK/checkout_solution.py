@@ -66,10 +66,11 @@ class Item():
         self.sku = sku
         self.total_cost = 0
         self.quantity = 0
-        self.single_cost = SKU_DISCOUNT_MAP[self.sku][KEY_SINGLECOST]
-        self.multibuy_discount_offers = SKU_DISCOUNT_MAP.get(SKU_DISCOUNT_MAP[self.sku][KEY_MULTIBUY_OFFERS], [])
-        self.multiprice_one_free_if = []
-        self.buyx_gety_free = []
+        sku_map = SKU_DISCOUNT_MAP[self.sku]
+        self.single_cost = sku_map[KEY_SINGLECOST]
+        self.multibuy_discount_offers = SKU_DISCOUNT_MAP.get(sku_map[KEY_MULTIBUY_OFFERS], [])
+        self.multiprice_one_free_if = SKU_DISCOUNT_MAP.get(sku_map[KEY_MULTIPRICE_OFFERS], [])
+        self.buyx_gety_free = SKU_DISCOUNT_MAP.get(sku_map[KEY_BUYX_GETY_FREE_OFFERS], [])
 
     # Cost function rings up the value of the quantity and cost of each item
     def cost(self, all_items):
@@ -242,4 +243,5 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
+
 
