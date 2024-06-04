@@ -4,7 +4,6 @@
  As mentioned below, constants should be in seperate file, but to make it easier to
  Review I've left it here
 """
-KNOWN_SKUS = ["A", "B", "C", "D", "E", "F"]
 KEY_SINGLECOST = "single_cost"
 KEY_MULTIBUY_OFFERS = "multibuy_discount_offers"
 KEY_MULTIPRICE_OFFERS = "multiprice_one_free_if"
@@ -46,7 +45,7 @@ def checkout(skus):
 
     # Check all letters inside the string are valid and letters
     for sku in skus:
-        if sku not in KNOWN_SKUS:
+        if sku not in SKU_DISCOUNT_MAP.keys():
             return -1
         try:
             str(sku)
@@ -68,9 +67,9 @@ class Item():
         self.quantity = 0
         sku_map = SKU_DISCOUNT_MAP[self.sku]
         self.single_cost = sku_map[KEY_SINGLECOST]
-        self.multibuy_discount_offers = SKU_DISCOUNT_MAP.get(sku_map[KEY_MULTIBUY_OFFERS], [])
-        self.multiprice_one_free_if = SKU_DISCOUNT_MAP.get(sku_map[KEY_MULTIPRICE_OFFERS], [])
-        self.buyx_gety_free = SKU_DISCOUNT_MAP.get(sku_map[KEY_BUYX_GETY_FREE_OFFERS], [])
+        self.multibuy_discount_offers = sku_map.get(KEY_MULTIBUY_OFFERS, [])
+        self.multiprice_one_free_if = sku_map.get(KEY_MULTIPRICE_OFFERS, [])
+        self.buyx_gety_free = sku_map.get(KEY_BUYX_GETY_FREE_OFFERS, [])
 
     # Cost function rings up the value of the quantity and cost of each item
     def cost(self, all_items):
@@ -211,13 +210,6 @@ class SKU_F(Item):
         self.single_cost = 10
         self.buyx_gety_free = [(2, 1)]
 
-"""
- Ideally this and other constants would be in another file but for simplicity of review I'll
- leave it like this. KNOWN_SKUS wouldn't need to exist since  SKU_ITEM_MAP.keys() would work.
-"""
-SKU_ITEM_MAP = {"A": SKU_A, "B": SKU_B, "C": SKU_C, "D": SKU_D, "E": SKU_E, "F": SKU_F}
-
-
 class Basket():
     # Init holds the baskets contents as singleton objects with quantity, value and cost values
     def __init__(self):
@@ -243,5 +235,6 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
+
 
 
