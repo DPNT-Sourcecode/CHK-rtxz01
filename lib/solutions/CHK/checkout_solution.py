@@ -4,7 +4,7 @@
  As mentioned below, constants should be in seperate file, but to make it easier to
  Review I've left it here
 """
-KNOWN_SKUS = ["A", "B", "C", "D", "E"]
+KNOWN_SKUS = ["A", "B", "C", "D", "E", "F"]
 
 def checkout(skus):
     # Verify all items in sku string are valid strings and known
@@ -36,6 +36,7 @@ class Item():
         self.quantity = 0
         self.multibuy_discount_offers = []
         self.multiprice_one_free_if = []
+        self.buyx_gety_free = []
 
     # Cost function rings up the value of the quantity and cost of each item
     def cost(self, all_items):
@@ -44,6 +45,14 @@ class Item():
 
     # Discount function calculates how many applicable discounts are available and reduces cost
     def discount(self, all_items):
+
+        best_multibuy_discount = self.get_best_multibuy_discount()
+        best_multiprice_discount = self.get_best_multiprice_discount(all_items)
+        self.total_cost = (self.total_cost - best_multibuy_discount) - best_multiprice_discount
+
+    # @ param - all-items = all items in basket
+    # @returns best applicable multiprice discount
+    def get_best_multiprice_discount(self, all_items):
         """
         My understanding here based on the wording is that if a purchase is made of 'EEBB',
         one of the B items is free, bu still counts towards the 2 for promo.
@@ -52,23 +61,24 @@ class Item():
         This assumption is based on the wording of
          "All the offers are well balanced so that they can be safely combined."
         """
-
         """
         After deploying and failing a test I learned that 4 EE purchases should remove the cost even the discounted
         price of the 2B for 45, which Iw as unsure about. Now I assume that when an item is marked as 'Free' it no
         longer counts towards promos for that item, unless this still counts for one item for 45 - 30, will see.
         """
-        # **** Multiprice Discount ****
-        multiprice_discount = 0
+        best_multiprice_discount = 0
         # multiprice_one_free_if is a list of any multipriced offers that translates to a free item
         for multiprice in self.multiprice_one_free_if:
             quantity, item = multiprice
             if item in all_items.keys():
                 free_items = all_items[item].quantity // quantity
-                multiprice_discount += self.single_cost * free_items
+                best_multiprice_discount += self.single_cost * free_items
                 self.quantity = self.quantity - free_items
+        return best_multiprice_discount
 
-        # **** Multibuy Discount ****
+
+    # @returns best applicable multibuy discount
+    def get_best_multibuy_discount(self):
         # Multibuy discount is only for discounts based on buying X amounts of product
         """
         Some further coments to this below block, it is not 100% optimal, there may possibly be cases where
@@ -84,7 +94,7 @@ class Item():
             first_discount = first_multibuy_discount * (self.quantity // first_quantity)
             remainder_quantity = self.quantity % first_quantity
             best_second_discount = 0
-            
+
             for second_multibuy in self.multibuy_discount_offers:
                 second_quantity, second_mutlybuy_discount = second_multibuy
                 second_discount = second_mutlybuy_discount * (remainder_quantity // second_quantity)
@@ -92,10 +102,8 @@ class Item():
                 if first_discount + second_discount > best_multibuy_discount:
                     best_multibuy_discount = first_discount + second_discount
 
+        return best_multibuy_discount
 
-
-
-        self.total_cost = (self.total_cost - best_multibuy_discount) - multiprice_discount
     # Scan adds another quantity of an item to the basket
     def scan(self):
         self.quantity += 1
@@ -131,11 +139,17 @@ class SKU_E(Item):
         super().__init__()
         self.single_cost = 40
 
+class SKU_F(Item):
+    def __init__(self):
+        super().__init__()
+        self.single_cost = 10
+        self.buyx_gety_free = [(2, 1)]
+
 """
  Ideally this and other constants would be in another file but for simplicity of review I'll
  leave it like this. KNOWN_SKUS wouldn't need to exist since  SKU_ITEM_MAP.keys() would work.
 """
-SKU_ITEM_MAP = {"A": SKU_A, "B": SKU_B, "C": SKU_C, "D": SKU_D, "E": SKU_E}
+SKU_ITEM_MAP = {"A": SKU_A, "B": SKU_B, "C": SKU_C, "D": SKU_D, "E": SKU_E, "F": SKU_F}
 
 
 class Basket():
