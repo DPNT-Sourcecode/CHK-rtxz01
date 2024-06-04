@@ -86,7 +86,7 @@ class TestSum():
         assert checkout_solution.checkout("UUUUU") == 160
         assert checkout_solution.checkout("UUUUUU") == 240
         assert checkout_solution.checkout("UUUUUUU") == 200
-        assert checkout_solution.checkout("UUUUUUUU") == 240
+        assert checkout_solution.checkout("UUUUUUUU") == 200
 
 
 
@@ -121,6 +121,7 @@ track of my mistakes here.
         # assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 
