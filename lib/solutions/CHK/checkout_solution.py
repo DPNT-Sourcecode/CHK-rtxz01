@@ -119,7 +119,7 @@ class Item():
             free_items = 0
             while quantity_needed <= current_quantity:
                 free_items += 1
-                current_quantity -= 1
+                current_quantity -= 1 + quantity_needed
 
             if free_items > most_free_items:
                 most_free_items = free_items
@@ -199,4 +199,4 @@ class Basket():
         return total_cost
 
 if __name__ == "__main__":
-    checkout("AAAAAEEBAAABB")
+    checkout("FFF")
