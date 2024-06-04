@@ -235,6 +235,3 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
-
-
-
