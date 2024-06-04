@@ -107,6 +107,7 @@ class Item():
 
         return best_multibuy_discount
 
+    # Finds the best applicable discount for buyX get Y free
     # @returns amount of free items to be removed from quantity
     def get_buyx_gety_free_quantity(self):
         """
@@ -202,3 +203,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
+
