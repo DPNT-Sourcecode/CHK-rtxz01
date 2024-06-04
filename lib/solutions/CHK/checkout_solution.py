@@ -47,9 +47,11 @@ class Item():
     def discount(self, all_items):
         buyX_getY_free_items = self.get_buyx_gety_free_quantity()
         self.quantity -= buyX_getY_free_items
+        buyx_gety_free_discount = buyX_getY_free_items * self.single_cost
         best_multiprice_discount = self.get_best_multiprice_discount(all_items)
         best_multibuy_discount = self.get_best_multibuy_discount()
-        self.total_cost = (self.total_cost - best_multibuy_discount) - best_multiprice_discount
+        self.total_cost = (self.total_cost -
+                           (best_multibuy_discount + best_multiprice_discount + buyx_gety_free_discount))
 
     # @ param - all-items = all items in basket
     # @returns best applicable multiprice discount
@@ -117,7 +119,7 @@ class Item():
             quantity_needed, free_quantity = offer
             current_quantity = self.quantity
             free_items = 0
-            while quantity_needed <= current_quantity:
+            while quantity_needed < current_quantity:
                 free_items += 1
                 current_quantity -= 1 + quantity_needed
 
