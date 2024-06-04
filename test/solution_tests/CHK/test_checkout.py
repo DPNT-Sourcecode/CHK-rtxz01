@@ -3,9 +3,11 @@ from solutions.CHK import checkout_solution
 
 class TestSum():
     def test_checkout(self):
+        # Bad inputs
         assert checkout_solution.checkout(True) == -1
         assert checkout_solution.checkout("ABC12D") == -1
         assert checkout_solution.checkout(["A", "B", True, "C"]) == -1
+        # single item tests
         assert checkout_solution.checkout("A") == 50
         assert checkout_solution.checkout("B") == 30
         assert checkout_solution.checkout("C") == 20
@@ -32,12 +34,13 @@ class TestSum():
         assert checkout_solution.checkout("X") ==  90
         assert checkout_solution.checkout("Y") ==  10
         assert checkout_solution.checkout("Z") ==  50
-        assert checkout_solution.checkout("ABCDEF") == 165
+        # Multibuy tests
         assert checkout_solution.checkout("AAA") == 130
+        assert checkout_solution.checkout("AAAA") == 180
+        assert checkout_solution.checkout("AAAAA") == 200
+        assert checkout_solution.checkout("AAAAAA") == 250
         assert checkout_solution.checkout("BBBB") == 90
-        assert checkout_solution.checkout("BBAAABB") == 220
-        assert checkout_solution.checkout("CD") == 35
-        assert checkout_solution.checkout("EEB") == 80
+        assert checkout_solution.checkout("BBBBB") == 120
         assert checkout_solution.checkout("FF") == 20
         assert checkout_solution.checkout("FFF") == 20
         assert checkout_solution.checkout("FFFF") == 30
@@ -63,6 +66,12 @@ class TestSum():
         assert checkout_solution.checkout("VVVVV") == 220
         assert checkout_solution.checkout("VVVVVV") == 260
 
+        #Mixed tests
+        assert checkout_solution.checkout("ABCDEF") == 165
+        assert checkout_solution.checkout("BBAAABB") == 220
+        assert checkout_solution.checkout("CD") == 35
+        assert checkout_solution.checkout("EEB") == 80
+
 
         # I don't think ths is the intended implementation. Buying 4 E gives you a further 15 discount
         # second revision of this, my assert may be incorrect due to my new understanding of how multiprice works
@@ -83,6 +92,7 @@ class TestSum():
         assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 
