@@ -122,7 +122,7 @@ class Item():
             if item in all_items.keys():
                 free_items = all_items[item].quantity // quantity
                 best_multiprice_discount += self.single_cost * free_items
-                self.quantity = self.quantity - free_items
+                # self.quantity = self.quantity - free_items
         return best_multiprice_discount
 
 
