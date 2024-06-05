@@ -33,7 +33,7 @@ SKU_DISCOUNT_MAP = {
     "H": {KEY_SINGLECOST: 10, KEY_MULTIBUY_OFFERS: [(5, 5), (10, 20)]},
     "I": {KEY_SINGLECOST: 35,},
     "J": {KEY_SINGLECOST: 60,},
-    "K": {KEY_SINGLECOST: 70, KEY_MULTIBUY_OFFERS: [(2, 10)]},
+    "K": {KEY_SINGLECOST: 70, KEY_MULTIBUY_OFFERS: [(2, 20)]},
     "L": {KEY_SINGLECOST: 90,},
     "M": {KEY_SINGLECOST: 15, KEY_MULTIPRICE_OFFERS: [(3, "N")]},
     "N": {KEY_SINGLECOST: 40,},
@@ -189,7 +189,7 @@ class Item():
         discount_quantity_required, discount_cost, discount_eligible_items = self.group_discount
         promo_items = [item for item in all_items.values() if item.sku in discount_eligible_items]
         # Sorts the list by price descending to make it easier to remove most expensive first
-        promo_items.sort(key=lambda item: item.single_quantity, reverse=True)
+        promo_items.sort(key=lambda item: item.single_cost, reverse=True)
 
         valid_items_quantity = sum([item.quantity for item in promo_items])
         # Amount of discount groups in basket
@@ -277,6 +277,6 @@ class Basket():
         return total_cost
 
 if __name__ == "__main__":
-    checkout("S")
+    checkout("SSS")
 
 
