@@ -88,17 +88,13 @@ class Item():
 
     # Cost function rings up the value of the quantity and cost of each item
     def cost(self, all_items):
-        self.total_cost = self.single_cost * self.quantity
-        self.discount(all_items)
-
-    # Discount function calculates how many applicable discounts are available and reduces cost
-    def discount(self, all_items):
         group_discount_cost = self.get_and_apply_group_discount(all_items)
         buyX_getY_free_items = self.get_buyx_gety_free_quantity()
         self.quantity -= buyX_getY_free_items
         buyx_gety_free_discount = buyX_getY_free_items * self.single_cost
         best_multiprice_discount = self.get_best_multiprice_discount(all_items)
         best_multibuy_discount = self.get_best_multibuy_discount()
+        self.total_cost = self.single_cost * self.quantity
         self.total_cost = (self.total_cost + group_discount_cost) - \
                           (best_multibuy_discount + best_multiprice_discount + buyx_gety_free_discount)
 
@@ -278,5 +274,6 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("SSS")
+
 
 
