@@ -94,8 +94,7 @@ class Item():
         self.apply_best_multiprice_discount(all_items)
         best_multibuy_discount = self.get_best_multibuy_discount()
         unit_costs = self.single_cost * self.quantity
-        self.total_cost = (unit_costs + group_discount_cost) - \
-                          (best_multibuy_discount)
+        self.total_cost = (unit_costs + group_discount_cost) - (best_multibuy_discount)
 
 
     # @ param - all-items = all items in basket
@@ -273,6 +272,7 @@ class Basket():
         return total_cost
 
 if __name__ == "__main__":
-    checkout("STXXYZS")
+    checkout("SSXYZ")
+
 
 
