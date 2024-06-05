@@ -184,13 +184,18 @@ class Item():
         if self.group_discount is None:
             return 0
 
-        quantity_required, total_cost, eligible_items = self.group_discount
+        quantity_required, discount_cost, eligible_items = self.group_discount
         promo_items = [item for item in all_items if item.sku in eligible_items]
+        # Sorts the list by price descending to make it easier to remove most expensive first
+        promo_items.sort(key=lambda item: item.single_quntaity, reverse=True)
 
         valid_items_quantity = sum([item.quantity for item in promo_items])
         # Amount of discount groups in basket
         group_discounts_quantity = valid_items_quantity // quantity_required
-        
+        total_discount_cost = group_discounts_quantity * discount_cost
+
+        for idx in range(group_discounts_quantity)
+
 
     # Scan adds another quantity of an item to the basket
     def scan(self):
