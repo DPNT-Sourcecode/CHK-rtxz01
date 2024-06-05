@@ -187,7 +187,7 @@ class Item():
             return 0
 
         discount_quantity_required, discount_cost, discount_eligible_items = self.group_discount
-        promo_items = [item for item in all_items if item.sku in discount_eligible_items]
+        promo_items = [item for item in all_items.items() if item.sku in discount_eligible_items]
         # Sorts the list by price descending to make it easier to remove most expensive first
         promo_items.sort(key=lambda item: item.single_quntaity, reverse=True)
 
@@ -277,5 +277,5 @@ class Basket():
         return total_cost
 
 if __name__ == "__main__":
-    checkout("FFF")
+    checkout("S")
 
