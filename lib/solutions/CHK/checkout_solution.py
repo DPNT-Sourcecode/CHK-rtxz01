@@ -246,7 +246,3 @@ class Basket():
 # Main function for running manual debugger
 if __name__ == "__main__":
     checkout("SSXYZ")
-
-
-
-
