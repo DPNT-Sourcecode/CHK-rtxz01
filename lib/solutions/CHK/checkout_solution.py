@@ -91,17 +91,15 @@ class Item():
         group_discount_cost = self.get_and_apply_group_discount(all_items)
         buyX_getY_free_items = self.get_buyx_gety_free_quantity()
         self.quantity -= buyX_getY_free_items
-        # buyx_gety_free_discount = buyX_getY_free_items * self.single_cost
-        best_multiprice_discount = self.get_best_multiprice_discount(all_items)
+        self.apply_best_multiprice_discount(all_items)
         best_multibuy_discount = self.get_best_multibuy_discount()
         unit_costs = self.single_cost * self.quantity
         self.total_cost = (unit_costs + group_discount_cost) - \
-                          (best_multibuy_discount + best_multiprice_discount)
+                          (best_multibuy_discount)
 
 
     # @ param - all-items = all items in basket
-    # @returns best applicable multiprice discount
-    def get_best_multiprice_discount(self, all_items):
+    def apply_best_multiprice_discount(self, all_items):
         """
         My understanding here based on the wording is that if a purchase is made of 'EEBB',
         one of the B items is free, bu still counts towards the 2 for promo.
@@ -122,8 +120,10 @@ class Item():
             if item in all_items.keys():
                 free_items = all_items[item].quantity // quantity
                 best_multiprice_discount += self.single_cost * free_items
-                # self.quantity = self.quantity - free_items
-        return best_multiprice_discount
+                self.quantity = self.quantity - free_items
+        """
+        Realised here I was both decrementing the quantity and applying a cost discount
+        """
 
 
     # @returns best applicable multibuy discount
@@ -274,3 +274,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("EEB")
+
