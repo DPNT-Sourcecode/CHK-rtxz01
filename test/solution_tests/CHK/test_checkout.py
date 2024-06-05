@@ -14,26 +14,26 @@ class TestSum():
         assert checkout_solution.checkout("D") == 15
         assert checkout_solution.checkout("E") == 40
         assert checkout_solution.checkout("F") == 10
-        assert checkout_solution.checkout("G") ==  20
-        assert checkout_solution.checkout("H") ==  10
-        assert checkout_solution.checkout("I") ==  35
-        assert checkout_solution.checkout("J") ==  60
-        assert checkout_solution.checkout("K") ==  80
-        assert checkout_solution.checkout("L") ==  90
-        assert checkout_solution.checkout("M") ==  15
-        assert checkout_solution.checkout("N") ==  40
-        assert checkout_solution.checkout("O") ==  10
-        assert checkout_solution.checkout("P") ==  50
-        assert checkout_solution.checkout("Q") ==  30
-        assert checkout_solution.checkout("R") ==  50
-        assert checkout_solution.checkout("S") ==  30
-        assert checkout_solution.checkout("T") ==  20
-        assert checkout_solution.checkout("U") ==  40
-        assert checkout_solution.checkout("V") ==  50
-        assert checkout_solution.checkout("W") ==  20
-        assert checkout_solution.checkout("X") ==  90
-        assert checkout_solution.checkout("Y") ==  10
-        assert checkout_solution.checkout("Z") ==  50
+        assert checkout_solution.checkout("G") == 20
+        assert checkout_solution.checkout("H") == 10
+        assert checkout_solution.checkout("I") == 35
+        assert checkout_solution.checkout("J") == 60
+        assert checkout_solution.checkout("K") == 60
+        assert checkout_solution.checkout("L") == 90
+        assert checkout_solution.checkout("M") == 15
+        assert checkout_solution.checkout("N") == 40
+        assert checkout_solution.checkout("O") == 10
+        assert checkout_solution.checkout("P") == 50
+        assert checkout_solution.checkout("Q") == 30
+        assert checkout_solution.checkout("R") == 50
+        assert checkout_solution.checkout("S") == 20
+        assert checkout_solution.checkout("T") == 20
+        assert checkout_solution.checkout("U") == 40
+        assert checkout_solution.checkout("V") == 50
+        assert checkout_solution.checkout("W") == 20
+        assert checkout_solution.checkout("X") == 17
+        assert checkout_solution.checkout("Y") == 20
+        assert checkout_solution.checkout("Z") == 21
         # Multibuy tests
         assert checkout_solution.checkout("AAA") == 130
         assert checkout_solution.checkout("AAAA") == 180
@@ -129,6 +129,7 @@ track of my mistakes here.
         # assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 
