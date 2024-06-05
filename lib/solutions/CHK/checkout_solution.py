@@ -185,8 +185,12 @@ class Item():
             return 0
 
         quantity_required, total_cost, eligible_items = self.group_discount
+        promo_items = [item for item in all_items if item.sku in eligible_items]
 
-
+        valid_items_quantity = sum([item.quantity for item in promo_items])
+        # Amount of discount groups in basket
+        group_discounts_quantity = valid_items_quantity // quantity_required
+        
 
     # Scan adds another quantity of an item to the basket
     def scan(self):
@@ -260,4 +264,3 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
-
