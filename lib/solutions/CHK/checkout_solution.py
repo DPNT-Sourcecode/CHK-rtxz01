@@ -94,8 +94,8 @@ class Item():
         buyx_gety_free_discount = buyX_getY_free_items * self.single_cost
         best_multiprice_discount = self.get_best_multiprice_discount(all_items)
         best_multibuy_discount = self.get_best_multibuy_discount()
-        self.total_cost = self.single_cost * self.quantity
-        self.total_cost = (self.total_cost + group_discount_cost) - \
+        unit_costs = self.single_cost * self.quantity
+        self.total_cost = (unit_costs + group_discount_cost) - \
                           (best_multibuy_discount + best_multiprice_discount + buyx_gety_free_discount)
 
 
@@ -273,7 +273,7 @@ class Basket():
         return total_cost
 
 if __name__ == "__main__":
-    checkout("SSS")
+    checkout("FFF")
 
 
 
