@@ -110,16 +110,18 @@ class TestSum():
         assert checkout_solution.checkout("STX") == 45
         assert checkout_solution.checkout("XYZ") == 45
         assert checkout_solution.checkout("STXXYZ") == 90
-        assert checkout_solution.checkout("STXXYZS") == 90 + 20
-        assert checkout_solution.checkout("STXXYZT") == 90 + 20
+        assert checkout_solution.checkout("STXXYZS") == 90 + 17
+        assert checkout_solution.checkout("STXXYZT") == 90 + 17
         assert checkout_solution.checkout("STXXYZX") == 90 + 17
-        assert checkout_solution.checkout("STXXYZY") == 90 + 20
-        assert checkout_solution.checkout("STXXYZZ") == 90 + 21
+        assert checkout_solution.checkout("STXXYZY") == 90 + 17
+        assert checkout_solution.checkout("STXXYZZ") == 90 + 17
         assert checkout_solution.checkout("STXXYZS") == 90 + (20 * 2)
         assert checkout_solution.checkout("STXXYZT") == 90 + (20 * 2)
         assert checkout_solution.checkout("STXXYZX") == 90 + (17 * 2)
         assert checkout_solution.checkout("STXXYZY") == 90 + (20 * 2)
         assert checkout_solution.checkout("STXXYZZ") == 90 + (21 * 2)
+        # Complex group discounts (checking it removes most expensive item for customer benefit)
+        assert checkout_solution.checkout("SSXYZ") == 45 + 17 + 20
 
         #Mixed tests
         assert checkout_solution.checkout("ABCDEF") == 165
@@ -155,6 +157,7 @@ track of my mistakes here.
         # assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 
