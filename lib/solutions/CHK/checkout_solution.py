@@ -93,13 +93,14 @@ class Item():
 
     # Discount function calculates how many applicable discounts are available and reduces cost
     def discount(self, all_items):
+        group_discount_cost = self.get_and_apply_group_discount(all_items)
         buyX_getY_free_items = self.get_buyx_gety_free_quantity()
         self.quantity -= buyX_getY_free_items
         buyx_gety_free_discount = buyX_getY_free_items * self.single_cost
         best_multiprice_discount = self.get_best_multiprice_discount(all_items)
         best_multibuy_discount = self.get_best_multibuy_discount()
-        self.total_cost = (self.total_cost -
-                           (best_multibuy_discount + best_multiprice_discount + buyx_gety_free_discount))
+        self.total_cost = (self.total_cost + group_discount_cost) - \
+                          (best_multibuy_discount + best_multiprice_discount + buyx_gety_free_discount)
 
 
     # @ param - all-items = all items in basket
@@ -178,23 +179,31 @@ class Item():
 
         return most_free_items
 
+    # Applies any group discounts and removes quantity of items as required
     # @ param - all-items = all items in basket
     # @returns cost for all removed items
     def get_and_apply_group_discount(self, all_items):
         if self.group_discount is None:
             return 0
 
-        quantity_required, discount_cost, eligible_items = self.group_discount
-        promo_items = [item for item in all_items if item.sku in eligible_items]
+        discount_quantity_required, discount_cost, discount_eligible_items = self.group_discount
+        promo_items = [item for item in all_items if item.sku in discount_eligible_items]
         # Sorts the list by price descending to make it easier to remove most expensive first
         promo_items.sort(key=lambda item: item.single_quntaity, reverse=True)
 
         valid_items_quantity = sum([item.quantity for item in promo_items])
         # Amount of discount groups in basket
-        group_discounts_quantity = valid_items_quantity // quantity_required
-        total_discount_cost = group_discounts_quantity * discount_cost
+        group_discounts_quantity = valid_items_quantity // discount_quantity_required
 
-        for idx in range(group_discounts_quantity)
+        items_to_remove = group_discounts_quantity * discount_quantity_required
+        for item in promo_items:
+            while item.quantity > 0 and items_to_remove > 0:
+                items_to_remove -= 1
+                item.quantity -= 1
+
+        total_discount_cost = group_discounts_quantity * discount_cost
+        return total_discount_cost
+
 
 
     # Scan adds another quantity of an item to the basket
@@ -269,3 +278,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
+
