@@ -49,11 +49,11 @@ class TestSum():
         assert checkout_solution.checkout("FFFF") == 30
         assert checkout_solution.checkout("FFFFF") == 40
         assert checkout_solution.checkout("FFFFFF") == 40
-        assert checkout_solution.checkout("KK") == 150
-        assert checkout_solution.checkout("KKK") == 230
-        assert checkout_solution.checkout("KKKK") == 300
-        assert checkout_solution.checkout("KKKKK") == 380
-        assert checkout_solution.checkout("KKKKKK") == 450
+        assert checkout_solution.checkout("KK") == 120
+        assert checkout_solution.checkout("KKK") == 120 + 70
+        assert checkout_solution.checkout("KKKK") == 120 * 2
+        assert checkout_solution.checkout("KKKKK") == (120 * 2) + 70
+        assert checkout_solution.checkout("KKKKKK") == 120 * 3
         assert checkout_solution.checkout("PPPPP") == 200
         assert checkout_solution.checkout("PPPPPP") == 250
         assert checkout_solution.checkout("PPPPPPP") == 300
@@ -96,7 +96,30 @@ class TestSum():
         assert checkout_solution.checkout("UUUUUUU") == 240
         assert checkout_solution.checkout("UUUUUUUU") == 240
 
-
+        # Group discount tests
+        assert checkout_solution.checkout("SS") == 20 * 2
+        assert checkout_solution.checkout("TT") == 20 * 2
+        assert checkout_solution.checkout("XX") == 17 * 2
+        assert checkout_solution.checkout("YY") == 20 * 2
+        assert checkout_solution.checkout("ZZ") == 21 * 2
+        assert checkout_solution.checkout("SSS") == 45
+        assert checkout_solution.checkout("TTT") == 45
+        assert checkout_solution.checkout("XXX") == 45
+        assert checkout_solution.checkout("YYY") == 45
+        assert checkout_solution.checkout("ZZZ") == 45
+        assert checkout_solution.checkout("STX") == 45
+        assert checkout_solution.checkout("XYZ") == 45
+        assert checkout_solution.checkout("STXXYZ") == 90
+        assert checkout_solution.checkout("STXXYZS") == 90 + 20
+        assert checkout_solution.checkout("STXXYZT") == 90 + 20
+        assert checkout_solution.checkout("STXXYZX") == 90 + 17
+        assert checkout_solution.checkout("STXXYZY") == 90 + 20
+        assert checkout_solution.checkout("STXXYZZ") == 90 + 21
+        assert checkout_solution.checkout("STXXYZS") == 90 + (20 * 2)
+        assert checkout_solution.checkout("STXXYZT") == 90 + (20 * 2)
+        assert checkout_solution.checkout("STXXYZX") == 90 + (17 * 2)
+        assert checkout_solution.checkout("STXXYZY") == 90 + (20 * 2)
+        assert checkout_solution.checkout("STXXYZZ") == 90 + (21 * 2)
 
         #Mixed tests
         assert checkout_solution.checkout("ABCDEF") == 165
@@ -104,6 +127,9 @@ class TestSum():
         assert checkout_solution.checkout("CD") == 35
         assert checkout_solution.checkout("AAAAAEEBAAABB") == 455
         assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665
+        assert checkout_solution.checkout("STXXYZAAA") == 90 + 130
+        assert checkout_solution.checkout("STXXYZEEB") == 90 + (40 * 2)
+        assert checkout_solution.checkout("STXXYZFFF") == 90 + (10 * 2)
 
 """
 Past failed tests have been incorporeted to tests above, but it's worth keeping
@@ -129,6 +155,7 @@ track of my mistakes here.
         # assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665  # Got 695
         # 455 vs 470 result means I'm not calculating the 2B discount properly
         # This was due to a silly error in a =- b rather than  a = a - b, oops, should have function tested that!
+
 
 
 

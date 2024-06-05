@@ -1,7 +1,7 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 """
- As mentioned below, constants should be in seperate file, but to make it easier to
+ As mentioned below, constants should be in separate file, but to make it easier to
  Review I've left it here
 """
 KEY_SINGLECOST = "single_cost"
@@ -11,6 +11,17 @@ KEY_MULTIBUY_OFFERS = "multibuy_discount_offers"
 KEY_MULTIPRICE_OFFERS = "multiprice_one_free_if"
 # BuyXgetYFree syntax is [(Quantity required, amount free)]
 KEY_BUYX_GETY_FREE_OFFERS = "buyx_gety_free"
+"""
+Going to assume any SKU will only be a part of one group discount at a time.
+This is what I would assume from a shop, but if this wasn't the case then
+there would be a concern about group subests / priorities to worry about which seems
+overcomplicated with the current specification
+"""
+# GroupDiscount key syntax is (Quantity of group needed, total cost for all items, eligible items)
+KEY_GROUP_DISCOUNT = "group_discount"
+# Known group discounts
+GD_3STXYZ_for_45 = (3, 45, "STXYZ")
+
 SKU_DISCOUNT_MAP = {
     "A": {KEY_SINGLECOST: 50, KEY_MULTIBUY_OFFERS: [(3, 20), (5, 50)]},
     "B": {KEY_SINGLECOST: 30, KEY_MULTIBUY_OFFERS: [(2, 15)], KEY_MULTIPRICE_OFFERS: [(2, "E")]},
@@ -30,14 +41,14 @@ SKU_DISCOUNT_MAP = {
     "P": {KEY_SINGLECOST: 50, KEY_MULTIBUY_OFFERS: [(5, 50)]},
     "Q": {KEY_SINGLECOST: 30, KEY_MULTIBUY_OFFERS: [(3, 10)], KEY_MULTIPRICE_OFFERS: [(3, "R")]},
     "R": {KEY_SINGLECOST: 50,},
-    "S": {KEY_SINGLECOST: 20,},
-    "T": {KEY_SINGLECOST: 20,},
+    "S": {KEY_SINGLECOST: 20, KEY_GROUP_DISCOUNT: GD_3STXYZ_for_45},
+    "T": {KEY_SINGLECOST: 20, KEY_GROUP_DISCOUNT: GD_3STXYZ_for_45},
     "U": {KEY_SINGLECOST: 40, KEY_BUYX_GETY_FREE_OFFERS: [(3, 1)]},
     "V": {KEY_SINGLECOST: 50, KEY_MULTIBUY_OFFERS: [(2, 10), (3, 20)]},
     "W": {KEY_SINGLECOST: 20,},
-    "X": {KEY_SINGLECOST: 17,},
-    "Y": {KEY_SINGLECOST: 20,},
-    "Z": {KEY_SINGLECOST: 21,},
+    "X": {KEY_SINGLECOST: 17, KEY_GROUP_DISCOUNT: GD_3STXYZ_for_45},
+    "Y": {KEY_SINGLECOST: 20, KEY_GROUP_DISCOUNT: GD_3STXYZ_for_45},
+    "Z": {KEY_SINGLECOST: 21, KEY_GROUP_DISCOUNT: GD_3STXYZ_for_45},
 }
 
 def checkout(skus):
@@ -73,6 +84,7 @@ class Item():
         self.multibuy_discount_offers = sku_map.get(KEY_MULTIBUY_OFFERS, [])
         self.multiprice_one_free_if = sku_map.get(KEY_MULTIPRICE_OFFERS, [])
         self.buyx_gety_free = sku_map.get(KEY_BUYX_GETY_FREE_OFFERS, [])
+        self.group_discount = sku_map.get(KEY_GROUP_DISCOUNT, None)
 
     # Cost function rings up the value of the quantity and cost of each item
     def cost(self, all_items):
@@ -166,6 +178,15 @@ class Item():
 
         return most_free_items
 
+    # @ param - all-items = all items in basket
+    # @returns cost for all removed items
+    def get_and_apply_group_discount(self, all_items):
+        if self.group_discount is None:
+            return 0
+
+        quantity_required, total_cost, eligible_items = self.group_discount
+
+
 
     # Scan adds another quantity of an item to the basket
     def scan(self):
@@ -239,3 +260,4 @@ class Basket():
 
 if __name__ == "__main__":
     checkout("FFF")
+
